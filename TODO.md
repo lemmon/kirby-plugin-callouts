@@ -1,0 +1,4 @@
+- Replace inline CSS icons with HTML <svg> icons driven by plugin options.
+- Add label translations support.
+- Allow custom inline labels for known types (e.g. `> [!TIP] My Fancy Label Tip`).
+- Explore Tailwind-friendly styling option.
