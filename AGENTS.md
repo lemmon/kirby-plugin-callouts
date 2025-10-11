@@ -16,7 +16,7 @@
 ## Parsing Flow
 1. Normalize newlines, split into an array, and iterate once.
 2. Collect contiguous blockquote lines and inspect the first line for `[!TYPE]`.
-3. Strip leading `>` from the block, fold back together, and pass through Markdown (Kirby Parsedown when available; otherwise a safe HTML fallback).
+3. Strip leading `>` from the block, fold back together, and run it through Kirby’s `kirbytext()` helper when available (otherwise a lightweight HTML fallback).
 4. Generate wrapper metadata:  
    - `class="callout callout--{slug}"` (slug derived from the raw type).  
    - `data-callout` and `data-callout-label` for styling.

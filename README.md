@@ -21,12 +21,9 @@ Your editors keep writing Markdown; your site gets polished, theme-ready callout
 1. Copy this repository into your Kirby project:  
    `site/plugins/lemmon-callouts/` → copy the plugin root here (or pull as a submodule).
 2. Include the desired CSS theme in your site template or snippet:
-   ```php
-   <?php
-   echo css('lemmon/callouts:assets/callouts-github.css');
-   // or
-   echo css('lemmon/callouts:assets/callouts-svelte.css');
-   ```
+```php
+<?= css($kirby->plugin('lemmon/callouts')->asset('callouts-github.css')->url()) ?>
+```
 3. Keep writing Markdown as usual:
    ```markdown
    > [!TIP]

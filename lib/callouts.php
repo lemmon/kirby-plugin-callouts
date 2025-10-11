@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Lemmon\Callouts;
 
-use Kirby\Text\Markdown;
+use Kirby\Cms\App;
+use Throwable;
 
 /**
  * Callout renderer that transforms GitHub-style callouts into HTML callout markup.
@@ -35,11 +36,6 @@ final class Renderer
      * Regex that strips the blockquote prefix from a line.
      */
     private const BLOCKQUOTE_PREFIX_PATTERN = '/^\s{0,3}>\s?/';
-
-    /**
-     * Cached Markdown parser instance.
-     */
-    private static ?Markdown $markdown = null;
 
     /**
      * Transforms GitHub-style callouts found inside blockquotes into HTML callout markup.
@@ -164,14 +160,6 @@ final class Renderer
     }
 
     /**
-     * Returns the Markdown parser instance.
-     */
-    private static function markdown(): Markdown
-    {
-        return self::$markdown ??= Markdown::factory();
-    }
-
-    /**
      * Renders callout content to HTML, using Kirby's Markdown when available.
      */
     private static function renderContent(string $content): string
@@ -180,8 +168,9 @@ final class Renderer
             return '';
         }
 
-        if (class_exists(Markdown::class)) {
-            return trim(self::markdown()->parse($content));
+        $kirbyHtml = self::renderWithKirbyText($content);
+        if ($kirbyHtml !== null) {
+            return trim($kirbyHtml);
         }
 
         return self::fallbackMarkdown($content);
@@ -361,4 +350,27 @@ final class Renderer
         );
     }
 
+    /**
+     * Attempts to render content using Kirby's kirbytext helper/App instance.
+     */
+    private static function renderWithKirbyText(string $content): ?string
+    {
+        if (function_exists('kirbytext')) {
+            try {
+                return kirbytext($content);
+            } catch (Throwable $exception) {
+                // Fall through to other strategies.
+            }
+        }
+
+        if (class_exists(App::class)) {
+            try {
+                return App::instance()->kirbytext($content);
+            } catch (Throwable $exception) {
+                // Fall through to fallback renderer.
+            }
+        }
+
+        return null;
+    }
 }

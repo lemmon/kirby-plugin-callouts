@@ -13,7 +13,7 @@ Kirby::plugin('lemmon/callouts', [
         'wrapper' => Renderer::DEFAULT_WRAPPER,
     ],
     'hooks' => [
-        'kirbytext:before' => static function (string $text): string {
+        'kirbytext:before' => function (string $text): string {
             return Renderer::transform($text, [
                 'classPrefix' => option('lemmon.callouts.classPrefix', Renderer::DEFAULT_CLASS_PREFIX),
                 'renderHeader' => option('lemmon.callouts.renderHeader', Renderer::DEFAULT_RENDER_HEADER),
