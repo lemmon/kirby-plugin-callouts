@@ -37,8 +37,7 @@ Keep writing Markdown/KirbyText as usual—whether you’re in a textarea field 
 - Inline SVG icons inherit the callout color and can be overridden per type.
 - Default icons are taken from the Lucide icon set.
 - Ships with two CSS themes (GitHub + Svelte inspired) that you can drop into your site immediately.
-- Includes CLI test harness and sample KirbyText/Markdown fixture for quick previews outside Kirby.
-- Graceful fallback when Kirby’s KirbyText/Markdown classes are not available (handy for CLI testing).
+- Built for Kirby’s KirbyText parser—no extra tooling required.
 
 _Note_: KirbyText mixes Markdown with Kirby-specific tags. This plugin focuses on the Markdown portion while staying compatible with KirbyText’s rendering pipeline.
 
@@ -95,15 +94,7 @@ The injected markup looks like:
 
 Use those modifier classes (`callout--tip`, `callout--note`, etc.) to tweak accent colours. Icons inherit `currentColor`, so adjusting `--callout-color` automatically recolours the frame (GitHub) or glyph (Svelte). Disabling `renderHeader` removes the `<header>` block in case you prefer pure CSS badges.
 
-## CLI Preview
-Use the included script to test transformations without booting Kirby:
-
-```bash
-php test.php               # uses tests/sample.md (KirbyText/Markdown fixture)
-php test.php docs/intro.md # run against your own KirbyText/Markdown file
-```
-
-If Kirby’s KirbyText/Markdown classes are unavailable, the plugin falls back to a simple paragraph renderer, so expect basic HTML but correct wrappers.
+See `EXAMPLE.md` for a GitHub-renderable example covering every built-in type plus a custom `[!SPOTLIGHT]` callout.
 
 ## License
 MIT License. See `LICENSE` (add one if your project does not already include it) for details.

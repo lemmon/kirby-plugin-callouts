@@ -182,35 +182,7 @@ final class Renderer
             return '';
         }
 
-        $kirbyHtml = self::renderWithKirbyText($content);
-        if ($kirbyHtml !== null) {
-            return trim($kirbyHtml);
-        }
-
-        return self::fallbackMarkdown($content);
-    }
-
-    /**
-     * Very small Markdown fallback for CLI usage when Kirby is absent.
-     */
-    private static function fallbackMarkdown(string $content): string
-    {
-        $paragraphs = preg_split('/\R{2,}/', $content) ?: [];
-        $rendered = [];
-
-        foreach ($paragraphs as $paragraph) {
-            $trimmed = trim($paragraph);
-            if ($trimmed === '') {
-                continue;
-            }
-
-            $rendered[] = sprintf(
-                '<p>%s</p>',
-                htmlspecialchars($trimmed, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8')
-            );
-        }
-
-        return implode("\n", $rendered);
+        return App::instance()->kirbytext($content);
     }
 
     /**
@@ -388,29 +360,5 @@ final class Renderer
         }
 
         return self::DEFAULT_ICONS['default'];
-    }
-
-    /**
-     * Attempts to render content using Kirby's kirbytext helper/App instance.
-     */
-    private static function renderWithKirbyText(string $content): ?string
-    {
-        if (function_exists('kirbytext')) {
-            try {
-                return kirbytext($content);
-            } catch (Throwable $exception) {
-                // Fall through to other strategies.
-            }
-        }
-
-        if (class_exists(App::class)) {
-            try {
-                return App::instance()->kirbytext($content);
-            } catch (Throwable $exception) {
-                // Fall through to fallback renderer.
-            }
-        }
-
-        return null;
     }
 }
