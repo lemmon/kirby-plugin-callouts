@@ -22,17 +22,25 @@ Your editors keep writing Markdown/KirbyText; your site gets polished, theme-rea
 _Note_: KirbyText mixes Markdown with Kirby-specific tags. This plugin focuses on the Markdown portion while staying compatible with KirbyText’s rendering pipeline.
 
 ## Installation
-1. Copy this repository into your Kirby project:
-   `site/plugins/callouts/` → copy the plugin root here (or pull as a submodule).
-2. (Optional) Include a bundled CSS theme (or craft your own) in your template/snippet:
+
+### Git Submodule
+```bash
+git submodule add https://github.com/lemmon/kirby-plugin-callouts.git site/plugins/callouts
+```
+
+### Manual
+[Download the plugin](https://api.github.com/repos/lemmon/kirby-plugin-callouts/zipball) and extract it to `/site/plugins/callouts`.
+
+## Usage
 ```php
 <?= css($kirby->plugin('lemmon/callouts')->asset('callouts-github.css')->url()) ?>
 ```
-3. Keep writing Markdown/KirbyText as usual—whether you’re in a textarea field or a markdown block:
-   ```markdown
-   > [!TIP]
-   > Add a handy tip right inside your content.
-   ```
+
+Keep writing Markdown/KirbyText as usual—whether you’re in a textarea field or a markdown block:
+```markdown
+> [!TIP]
+> Add a handy tip right inside your content.
+```
 
 ## Configuration
 Set options in `site/config/config.php` if you need to customize behaviour:
@@ -109,6 +117,7 @@ Questions, issues, or ideas? File them in the repository or reach out—this plu
 Icons are based on the [Lucide](https://lucide.dev) icon set (MIT License).
 
 ## Roadmap
+- [ ] Add Composer installation possible.
 - [ ] Add label translations support.
 - [ ] Allow custom inline labels for known types (e.g. `> [!TIP] My Fancy Label Tip`).
 - [ ] Explore Tailwind-friendly styling option.
