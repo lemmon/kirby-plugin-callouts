@@ -14,7 +14,11 @@ Kirby::plugin('lemmon/callouts', [
         'wrapper' => Renderer::DEFAULT_WRAPPER,
     ],
     'hooks' => [
-        'kirbytext:before' => function (string $text): string {
+        'kirbytext:before' => function (string|null $text): string|null {
+            if (empty($text)) {
+                return $text;
+            }
+
             return Renderer::transform($text, [
                 'classPrefix' => option('lemmon.callouts.classPrefix', Renderer::DEFAULT_CLASS_PREFIX),
                 'icons' => option('lemmon.callouts.icons', Renderer::DEFAULT_ICONS),
