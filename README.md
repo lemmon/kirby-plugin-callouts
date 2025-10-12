@@ -8,19 +8,6 @@ Your editors keep writing Markdown/KirbyText; your site gets polished, theme-rea
 - Documentation platforms such as GitHub, Svelte, and Docusaurus already rely on `[!TYPE]` callouts—let Kirby join the club.
 - Works out of the box with optional themes and still respects custom callout types your team invents.
 
-## Features
-- Turn `> [!TYPE]` blocks into callout wrappers automatically.
-- Supports NOTE, TIP, IMPORTANT, WARNING, CAUTION, and any custom type (e.g. `[!CHALLENGE]` → `callout--challenge`).
-- Configurable wrapper (`div` or `blockquote`) and CSS class prefix.
-- Optional HTML header injection for icon/label markup (on by default).
-- Inline SVG icons inherit the callout color and can be overridden per type.
-- Default icons are taken from the Lucide icon set.
-- Ships with two CSS themes (GitHub + Svelte inspired) that you can drop into your site immediately.
-- Includes CLI test harness and sample KirbyText/Markdown fixture for quick previews outside Kirby.
-- Graceful fallback when Kirby’s KirbyText/Markdown classes are not available (handy for CLI testing).
-
-_Note_: KirbyText mixes Markdown with Kirby-specific tags. This plugin focuses on the Markdown portion while staying compatible with KirbyText’s rendering pipeline.
-
 ## Installation
 
 ### Git Submodule
@@ -41,6 +28,19 @@ Keep writing Markdown/KirbyText as usual—whether you’re in a textarea field 
 > [!TIP]
 > Add a handy tip right inside your content.
 ```
+
+## Features
+- Turn `> [!TYPE]` blocks into callout wrappers automatically.
+- Supports NOTE, TIP, IMPORTANT, WARNING, CAUTION, and any custom type (e.g. `[!CHALLENGE]` → `callout--challenge`).
+- Configurable wrapper (`div` or `blockquote`) and CSS class prefix.
+- Optional HTML header injection for icon/label markup (on by default).
+- Inline SVG icons inherit the callout color and can be overridden per type.
+- Default icons are taken from the Lucide icon set.
+- Ships with two CSS themes (GitHub + Svelte inspired) that you can drop into your site immediately.
+- Includes CLI test harness and sample KirbyText/Markdown fixture for quick previews outside Kirby.
+- Graceful fallback when Kirby’s KirbyText/Markdown classes are not available (handy for CLI testing).
+
+_Note_: KirbyText mixes Markdown with Kirby-specific tags. This plugin focuses on the Markdown portion while staying compatible with KirbyText’s rendering pipeline.
 
 ## Configuration
 Set options in `site/config/config.php` if you need to customize behaviour:
