@@ -11,6 +11,7 @@
 - `assets/callouts-github.css` GitHub-inspired theme (vertical accent strip + header band).
 - `assets/callouts-svelte.css` Svelte-inspired theme (icon badge beside content).
 - `EXAMPLE.md` GitHub-renderable preview showing built-in and custom callout types.
+- `composer.json` publishes the composer package as `lemmon/kirby-callouts` (core plugin ID remains `lemmon/callouts`).
 
 ## Parsing Flow
 1. Normalize newlines, split into an array, and iterate once.

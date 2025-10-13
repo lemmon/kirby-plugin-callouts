@@ -10,6 +10,11 @@ Your editors keep writing Markdown/KirbyText; your site gets polished, theme-rea
 
 ## Installation
 
+### Composer
+```bash
+composer require lemmon/kirby-callouts
+```
+
 ### Git Submodule
 ```bash
 git submodule add https://github.com/lemmon/kirby-plugin-callouts.git site/plugins/callouts
@@ -113,7 +118,7 @@ Questions, issues, or ideas? File them in the repository or reach out-this plugi
 Icons are based on the [Lucide](https://lucide.dev) icon set (MIT License).
 
 ## Roadmap
-- [ ] Add Composer installation possible.
+- [x] Add Composer installation.
 - [ ] Add label translations support.
 - [ ] Allow custom inline labels for known types (e.g. `> [!TIP] My Fancy Label Tip`).
 - [ ] Explore Tailwind-friendly styling option.
