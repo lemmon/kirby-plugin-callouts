@@ -122,3 +122,4 @@ Icons are based on the [Lucide](https://lucide.dev) icon set (MIT License).
 - [ ] Add label translations support.
 - [ ] Allow custom inline labels for known types (e.g. `> [!TIP] My Fancy Label Tip`).
 - [ ] Explore Tailwind-friendly styling option.
+- [ ] Create custom block type for Blocks Field.

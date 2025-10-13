@@ -52,5 +52,6 @@
 - Offer a Tailwind-friendly styling option or preset.
 - Consider publishing a Kirby blueprint snippet documenting callout usage for editors.
 - Add automated snapshot tests comparing rendered HTML to fixtures.
+- Explore custom block type for Kirby's Blocks field.
 
 Keep this document updated when changing parser semantics, configuration keys, or shipped assets; future agents will thank you.
