@@ -21,10 +21,10 @@
 6. Non-callout blockquotes are returned untouched.
 
 ## Configurable Options
-- `lemmon.callouts.classPrefix` — defaults to `callout`; affects both classes and data attributes.
-- `lemmon.callouts.renderHeader` — defaults to `true`; injects a `<header>` with icon/label spans inside each callout.
-- `lemmon.callouts.icons` — associative array of inline SVG (keyed by modifier slug, plus `default`) used inside the header.
-- `lemmon.callouts.wrapper` — `'div'` (default) or `'blockquote'`.
+- `lemmon.callouts.classPrefix` - defaults to `callout`; affects both classes and data attributes.
+- `lemmon.callouts.renderHeader` - defaults to `true`; injects a `<header>` with icon/label spans inside each callout.
+- `lemmon.callouts.icons` - associative array of inline SVG (keyed by modifier slug, plus `default`) used inside the header.
+- `lemmon.callouts.wrapper` - `'div'` (default) or `'blockquote'`.
 - Parser accepts custom callout types without a whitelist; slugify fallback ensures CSS selectors exist.
 
 ## Styling Notes
@@ -38,7 +38,10 @@
 
 ## Development Tips
 - Maintain ASCII files; keep comments purposeful.
-- When extending renderer, prefer the current Parsedown-style loop—no heavy regex passes.
+- Stick to ASCII punctuation in docs (avoid em dashes) so diffs stay predictable.
+- When extending the renderer, stick with the current Parsedown-style loop and avoid heavy regex passes.
+- Use emojis sparingly in docs; a little personality is fine, but skip emoji-per-list formatting.
+- Commit messages should follow the Conventional Commits spec (e.g. `fix: ...`, `refactor: ...`).
 - Keep the BEM class structure (`callout`, `callout--foo`, `callout__header`, etc.) stable so existing CSS keeps working.
 - If adding options, thread them through `index.php` → `Renderer::transform()` → `mergeConfig()`.
 
@@ -49,4 +52,4 @@
 - Consider publishing a Kirby blueprint snippet documenting callout usage for editors.
 - Add automated snapshot tests comparing rendered HTML to fixtures.
 
-Keep this document updated when changing parser semantics, configuration keys, or shipped assets—future agents will thank you.
+Keep this document updated when changing parser semantics, configuration keys, or shipped assets; future agents will thank you.

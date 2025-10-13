@@ -316,13 +316,12 @@ final class Renderer
     private static function renderHeader(array $meta): string
     {
         $label = htmlspecialchars($meta['label'], ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
-        $modifier = htmlspecialchars($meta['modifier'], ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
         $prefix = htmlspecialchars($meta['prefix'], ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
         $icon = $meta['icon'];
 
-        $headerClass = trim(sprintf('%s__header %s__header--%s', $prefix, $prefix, $modifier));
-        $iconClass = trim(sprintf('%s__icon %s__icon--%s', $prefix, $prefix, $modifier));
-        $labelClass = trim(sprintf('%s__label %s__label--%s', $prefix, $prefix, $modifier));
+        $headerClass = sprintf('%s__header', $prefix);
+        $iconClass = sprintf('%s__icon', $prefix);
+        $labelClass = sprintf('%s__label', $prefix);
 
         return sprintf(
             '    <header class="%1$s" aria-label="%2$s"><span class="%3$s" aria-hidden="true">%4$s</span><span class="%5$s">%6$s</span></header>',

@@ -5,7 +5,7 @@ Your editors keep writing Markdown/KirbyText; your site gets polished, theme-rea
 
 ## Motivation
 - Kirby ships with great KirbyText (Markdown + KirbyTags) support, but callouts usually mean hand-written HTML or block blueprints.
-- Documentation platforms such as GitHub, Svelte, and Docusaurus already rely on `[!TYPE]` callouts—let Kirby join the club.
+- Documentation platforms such as GitHub, Svelte, and Docusaurus already rely on `[!TYPE]` callouts, so let Kirby join the club.
 - Works out of the box with optional themes and still respects custom callout types your team invents.
 
 ## Installation
@@ -23,7 +23,7 @@ git submodule add https://github.com/lemmon/kirby-plugin-callouts.git site/plugi
 <?= css($kirby->plugin('lemmon/callouts')->asset('callouts-github.css')->url()) ?>
 ```
 
-Keep writing Markdown/KirbyText as usual—whether you’re in a textarea field or a markdown block:
+Keep writing Markdown/KirbyText as usual-whether you’re in a textarea field or a markdown block:
 ```markdown
 > [!TIP]
 > Add a handy tip right inside your content.
@@ -31,13 +31,13 @@ Keep writing Markdown/KirbyText as usual—whether you’re in a textarea field 
 
 ## Features
 - Turn `> [!TYPE]` blocks into callout wrappers automatically.
-- Supports NOTE, TIP, IMPORTANT, WARNING, CAUTION, and any custom type (e.g. `[!CHALLENGE]` → `callout--challenge`).
+- Supports NOTE, TIP, IMPORTANT, WARNING, CAUTION, and any custom type (e.g. `[!CHALLENGE]` -> `callout--challenge`).
 - Configurable wrapper (`div` or `blockquote`) and CSS class prefix.
 - Optional HTML header injection for icon/label markup (on by default).
 - Inline SVG icons inherit the callout color and can be overridden per type.
 - Default icons are taken from the Lucide icon set.
 - Ships with two CSS themes (GitHub + Svelte inspired) that you can drop into your site immediately.
-- Built for Kirby’s KirbyText parser—no extra tooling required.
+- Built for Kirby’s KirbyText parser-no extra tooling required.
 
 _Note_: KirbyText mixes Markdown with Kirby-specific tags. This plugin focuses on the Markdown portion while staying compatible with KirbyText’s rendering pipeline.
 
@@ -64,7 +64,8 @@ return [
 - Any `[!TYPE]` yields classes like `callout callout--type` for styling hooks.
 
 ## Styling
-Bundled styles are optional—callouts expose straightforward class names (`callout`, `callout--tip`, `callout__header`, etc.), so rolling your own theme is simple. If you want ready-made examples, two drop-in themes live under `assets/`:
+> [!TIP]
+> Bundled styles are optional; callouts expose straightforward class names (`callout`, `callout--tip`, `callout__header`, etc.), so rolling your own theme is simple. Prefer a starting point? Two drop-in themes ship with the plugin.
 
 | Theme | Path | Notes |
 | ----- | ---- | ----- |
@@ -79,18 +80,22 @@ Both styles rely on CSS custom properties (accent colour, icon size). Override t
 }
 ```
 
-Custom callout types inherit the neutral defaults—just define selectors like `.callout--challenge` if you need bespoke colors.
+Custom callout types inherit the neutral defaults-just define selectors like `.callout--spotlight` if you need bespoke colors.
+
 The injected markup looks like:
 
 ```html
-<div class="callout callout--tip">
-    <header class="callout__header callout__header--tip">
-        <span class="callout__icon callout__icon--tip" aria-hidden="true"></span>
-        <span class="callout__label callout__label--tip">TIP</span>
+<div class="callout callout--spotlight">
+    <header class="callout__header" aria-label="SPOTLIGHT">
+        <span class="callout__icon" aria-hidden="true"><svg></svg></span>
+        <span class="callout__label">SPOTLIGHT</span>
     </header>
     <!-- KirbyText/Markdown content -->
 </div>
 ```
+
+> [!NOTE]
+> Rendered markup follows BEM conventions: `callout` is the block, `callout--type` modifiers hook variants, and `callout__header` / `callout__icon` / `callout__label` elements keep themes predictable.
 
 Use those modifier classes (`callout--tip`, `callout--note`, etc.) to tweak accent colours. Icons inherit `currentColor`, so adjusting `--callout-color` automatically recolours the frame (GitHub) or glyph (Svelte). Disabling `renderHeader` removes the `<header>` block in case you prefer pure CSS badges.
 
@@ -101,7 +106,7 @@ MIT License. See `LICENSE` (add one if your project does not already include it)
 
 ---
 
-Questions, issues, or ideas? File them in the repository or reach out—this plugin is designed to be extended.
+Questions, issues, or ideas? File them in the repository or reach out-this plugin is designed to be extended.
 
 ---
 
