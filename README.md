@@ -4,49 +4,57 @@ Bring GitHub-style callouts (a.k.a. admonitions) to Kirby using the familiar `[!
 Your editors keep writing Markdown/KirbyText; your site gets polished, theme-ready callouts.
 
 ## Motivation
-- Kirby ships with great KirbyText (Markdown + KirbyTags) support, but callouts usually mean hand-written HTML or block blueprints.
-- Documentation platforms such as GitHub, Svelte, and Docusaurus already rely on `[!TYPE]` callouts, so let Kirby join the club.
-- Works out of the box with optional themes and still respects custom callout types your team invents.
+
+-   Kirby ships with great KirbyText (Markdown + KirbyTags) support, but callouts usually mean hand-written HTML or block blueprints.
+-   Documentation platforms such as GitHub, Svelte, and Docusaurus already rely on `[!TYPE]` callouts, so let Kirby join the club.
+-   Works out of the box with optional themes and still respects custom callout types your team invents.
 
 ## Installation
 
 ### Composer
+
 ```bash
 composer require lemmon/kirby-callouts
 ```
 
 ### Git Submodule
+
 ```bash
 git submodule add https://github.com/lemmon/kirby-plugin-callouts.git site/plugins/callouts
 ```
 
 ### Manual
+
 [Download the plugin](https://api.github.com/repos/lemmon/kirby-plugin-callouts/zipball) and extract it to `/site/plugins/callouts`.
 
 ## Usage
+
 ```php
 <?= css($kirby->plugin('lemmon/callouts')->asset('callouts-github.css')->url()) ?>
 ```
 
 Keep writing Markdown/KirbyText as usual-whether you’re in a textarea field or a markdown block:
+
 ```markdown
 > [!TIP]
 > Add a handy tip right inside your content.
 ```
 
 ## Features
-- Turn `> [!TYPE]` blocks into callout wrappers automatically.
-- Supports NOTE, TIP, IMPORTANT, WARNING, CAUTION, and any custom type (e.g. `[!CHALLENGE]` -> `callout--challenge`).
-- Configurable wrapper (`div` or `blockquote`) and CSS class prefix.
-- Optional HTML header injection for icon/label markup (on by default).
-- Inline SVG icons inherit the callout color and can be overridden per type.
-- Default icons are taken from the Lucide icon set.
-- Ships with two CSS themes (GitHub + Svelte inspired) that you can drop into your site immediately.
-- Built for Kirby’s KirbyText parser-no extra tooling required.
+
+-   Turn `> [!TYPE]` blocks into callout wrappers automatically.
+-   Supports NOTE, TIP, IMPORTANT, WARNING, CAUTION, and any custom type (e.g. `[!CHALLENGE]` -> `callout--challenge`).
+-   Configurable wrapper (`div` or `blockquote`) and CSS class prefix.
+-   Optional HTML header injection for icon/label markup (on by default).
+-   Inline SVG icons inherit the callout color and can be overridden per type.
+-   Default icons are taken from the Lucide icon set.
+-   Ships with two CSS themes (GitHub + Svelte inspired) that you can drop into your site immediately.
+-   Built for Kirby’s KirbyText parser-no extra tooling required.
 
 _Note_: KirbyText mixes Markdown with Kirby-specific tags. This plugin focuses on the Markdown portion while staying compatible with KirbyText’s rendering pipeline.
 
 ## Configuration
+
 Set options in `site/config/config.php` if you need to customize behaviour:
 
 ```php
@@ -62,20 +70,21 @@ return [
 ];
 ```
 
-- `classPrefix`: changing this updates both wrapper classes (`{prefix} {prefix}--{type}`) and CSS selectors.
-- `renderHeader`: toggle the injected `<header>` that contains the icon span and label (themes expect this to stay on).
-- `icons`: associative array mapping modifier slugs (e.g. `note`, `tip`) to inline SVG strings. Using `currentColor` keeps icons in step with the callout accent, but you can hard-code colours if you prefer. Provide a `default` entry for fallback usage.
-- `wrapper`: switch between `<div>` (default) and `<blockquote>` depending on your semantic preference.
-- Any `[!TYPE]` yields classes like `callout callout--type` for styling hooks.
+-   `classPrefix`: changing this updates both wrapper classes (`{prefix} {prefix}--{type}`) and CSS selectors.
+-   `renderHeader`: toggle the injected `<header>` that contains the icon span and label (themes expect this to stay on).
+-   `icons`: associative array mapping modifier slugs (e.g. `note`, `tip`) to inline SVG strings. Using `currentColor` keeps icons in step with the callout accent, but you can hard-code colours if you prefer. Provide a `default` entry for fallback usage.
+-   `wrapper`: switch between `<div>` (default) and `<blockquote>` depending on your semantic preference.
+-   Any `[!TYPE]` yields classes like `callout callout--type` for styling hooks.
 
 ## Styling
+
 > [!TIP]
 > Bundled styles are optional; callouts expose straightforward class names (`callout`, `callout--tip`, `callout__header`, etc.), so rolling your own theme is simple. Prefer a starting point? Two drop-in themes ship with the plugin.
 
-| Theme | Path | Notes |
-| ----- | ---- | ----- |
+| Theme  | Path                         | Notes                                                       |
+| ------ | ---------------------------- | ----------------------------------------------------------- |
 | GitHub | `assets/callouts-github.css` | GitHub-like indicator with Lucide icons and minimal border. |
-| Svelte | `assets/callouts-svelte.css` | Compact vertical glyph inspired by Svelte docs. |
+| Svelte | `assets/callouts-svelte.css` | Compact vertical glyph inspired by Svelte docs.             |
 
 Both styles rely on CSS custom properties (accent colour, icon size). Override them in your own stylesheet to match brand guidelines:
 
@@ -107,6 +116,7 @@ Use those modifier classes (`callout--tip`, `callout--note`, etc.) to tweak acce
 See `EXAMPLE.md` for a GitHub-renderable example covering every built-in type plus a custom `[!SPOTLIGHT]` callout.
 
 ## License
+
 MIT License. See `LICENSE` for details.
 
 ---
@@ -118,8 +128,9 @@ Questions, issues, or ideas? File them in the repository or reach out-this plugi
 Icons are based on the [Lucide](https://lucide.dev) icon set (MIT License).
 
 ## Roadmap
-- [x] Add Composer installation.
-- [ ] Add label translations support.
-- [ ] Allow custom inline labels for known types (e.g. `> [!TIP] My Fancy Label Tip`).
-- [ ] Explore Tailwind-friendly styling option.
-- [ ] Create custom block type for Blocks Field.
+
+-   [x] Add Composer installation.
+-   [ ] Add label translations support.
+-   [ ] Allow custom inline labels for known types (e.g. `> [!TIP] My Fancy Label Tip`).
+-   [ ] Explore Tailwind-friendly styling option.
+-   [ ] Create custom block type for Blocks Field.
