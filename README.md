@@ -107,7 +107,7 @@ Use those modifier classes (`callout--tip`, `callout--note`, etc.) to tweak acce
 See `EXAMPLE.md` for a GitHub-renderable example covering every built-in type plus a custom `[!SPOTLIGHT]` callout.
 
 ## License
-MIT License. See `LICENSE` (add one if your project does not already include it) for details.
+MIT License. See `LICENSE` for details.
 
 ---
 
