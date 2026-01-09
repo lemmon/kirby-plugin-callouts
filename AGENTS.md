@@ -18,11 +18,12 @@
 ## Parsing Flow
 
 1. Normalize newlines, split into an array, and iterate once.
-2. Collect contiguous blockquote lines and inspect the first line for `[!TYPE]`.
-3. Strip leading `>` from the block, fold back together, and run it through Kirby’s `kirbytext()` helper.
-4. Generate wrapper metadata with BEM classes (`callout callout--{slug}`).
-5. Wrap in either `<div>` or `<blockquote>` (configurable).
-6. Non-callout blockquotes are returned untouched.
+2. Track fenced code blocks so callout detection skips those regions.
+3. Collect contiguous blockquote lines and inspect the first line for `[!TYPE]`.
+4. Strip leading `>` from the block, fold back together, and run it through Kirby’s `kirbytext()` helper.
+5. Generate wrapper metadata with BEM classes (`callout callout--{slug}`).
+6. Wrap in either `<div>` or `<blockquote>` (configurable).
+7. Non-callout blockquotes are returned untouched.
 
 ## Configurable Options
 

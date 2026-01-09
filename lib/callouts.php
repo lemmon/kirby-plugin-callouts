@@ -67,15 +67,38 @@ final class Renderer
 
         $result = [];
         $index = 0;
+        $fence = null;
 
         while ($index < $lineCount) {
-            if (self::isBlockquoteLine($lines[$index])) {
+            $line = $lines[$index];
+
+            if ($fence !== null) {
+                $result[] = $line;
+
+                if (self::isFenceEnd($line, $fence)) {
+                    $fence = null;
+                }
+
+                $index++;
+                continue;
+            }
+
+            $fenceStart = self::detectFenceStart($line);
+            if ($fenceStart !== null) {
+                $result[] = $line;
+                $fence = $fenceStart;
+
+                $index++;
+                continue;
+            }
+
+            if (self::isBlockquoteLine($line)) {
                 [$block, $index] = self::collectBlockquote($lines, $index);
                 $result[] = self::renderBlock($block, $config);
                 continue;
             }
 
-            $result[] = $lines[$index];
+            $result[] = $line;
             $index++;
         }
 
@@ -163,6 +186,41 @@ final class Renderer
         }
 
         return preg_match('/^\s{0,3}>/', $line) === 1;
+    }
+
+    /**
+     * Detects the start of a fenced code block.
+     *
+     * @return array{char: string, length: int}|null
+     */
+    private static function detectFenceStart(string $line): ?array
+    {
+        if (preg_match('/^\s{0,3}(`{3,}|~{3,})/', $line, $matches) !== 1) {
+            return null;
+        }
+
+        $fence = $matches[1];
+
+        return [
+            'char' => $fence[0],
+            'length' => strlen($fence),
+        ];
+    }
+
+    /**
+     * Checks whether the line closes the current fenced code block.
+     *
+     * @param array{char: string, length: int} $fence
+     */
+    private static function isFenceEnd(string $line, array $fence): bool
+    {
+        $pattern = sprintf(
+            '/^\s{0,3}%s{%d,}\s*$/',
+            preg_quote($fence['char'], '/'),
+            $fence['length']
+        );
+
+        return preg_match($pattern, $line) === 1;
     }
 
     /**

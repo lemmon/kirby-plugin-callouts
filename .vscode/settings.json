@@ -1,0 +1,11 @@
+{
+  "editor.formatOnSave": true,
+  "files.exclude": {
+    "kirby": true,
+    "vendor": true,
+    ".phpunit.result.cache": true,
+    "composer.lock": true
+  },
+  "files.trimFinalNewlines": true,
+  "search.exclude": {}
+}
