@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Lemmon\Callouts;
 
 use Kirby\Cms\App;
-use Throwable;
 
 /**
  * Callout renderer that transforms GitHub-style callouts into HTML callout markup.
@@ -171,7 +170,10 @@ final class Renderer
             $segments[] = self::indent($html);
         }
 
-        $content = implode("\n", array_filter($segments, static fn(string $segment): bool => $segment !== ''));
+        $content = implode("\n", array_filter(
+            $segments,
+            static fn(string $segment): bool => $segment !== '',
+        ));
 
         return self::wrapContent($content, $meta, $config['wrapper']);
     }
@@ -179,7 +181,7 @@ final class Renderer
     /**
      * Determines if the provided line belongs to a Markdown-style (KirbyText) blockquote.
      */
-    private static function isBlockquoteLine(?string $line): bool
+    private static function isBlockquoteLine(null|string $line): bool
     {
         if ($line === null) {
             return false;
@@ -193,7 +195,7 @@ final class Renderer
      *
      * @return array{char: string, length: int}|null
      */
-    private static function detectFenceStart(string $line): ?array
+    private static function detectFenceStart(string $line): null|array
     {
         if (preg_match('/^\s{0,3}(`{3,}|~{3,})/', $line, $matches) !== 1) {
             return null;
@@ -217,7 +219,7 @@ final class Renderer
         $pattern = sprintf(
             '/^\s{0,3}%s{%d,}\s*$/',
             preg_quote($fence['char'], '/'),
-            $fence['length']
+            $fence['length'],
         );
 
         return preg_match($pattern, $line) === 1;
@@ -250,11 +252,11 @@ final class Renderer
     {
         $indent = str_repeat('    ', $level);
 
-        $lines = preg_split('/\R/', $html) ?: [];
-        $indented = array_map(
-            static fn(string $line): string => $indent . rtrim($line),
-            $lines
-        );
+        $lines = preg_split('/\R/', $html);
+        if ($lines === false) {
+            $lines = [];
+        }
+        $indented = array_map(static fn(string $line): string => $indent . rtrim($line), $lines);
 
         return implode("\n", $indented);
     }
@@ -280,7 +282,9 @@ final class Renderer
             $classPrefix = self::DEFAULT_CLASS_PREFIX;
         }
 
-        $renderHeader = array_key_exists('renderHeader', $config) ? (bool) $config['renderHeader'] : self::DEFAULT_RENDER_HEADER;
+        $renderHeader = array_key_exists('renderHeader', $config)
+            ? (bool) $config['renderHeader']
+            : self::DEFAULT_RENDER_HEADER;
         $wrapper = $config['wrapper'] ?? self::DEFAULT_WRAPPER;
         if (!in_array($wrapper, ['div', 'blockquote'], true)) {
             $wrapper = self::DEFAULT_WRAPPER;
@@ -304,8 +308,12 @@ final class Renderer
      *
      * @return array{classes: string, modifier: string, label: string, prefix: string, icon: string}
      */
-    private static function buildCalloutMeta(string $classPrefix, string $type, string $rawType, array $config): array
-    {
+    private static function buildCalloutMeta(
+        string $classPrefix,
+        string $type,
+        string $rawType,
+        array $config,
+    ): array {
         $modifier = self::typeModifier($type);
 
         $baseClass = $classPrefix;
@@ -345,12 +353,7 @@ final class Renderer
             return sprintf('<%1$s class="%2$s"></%1$s>', $wrapper, $classes);
         }
 
-        return sprintf(
-            "<%1\$s class=\"%2\$s\">\n%3\$s\n</%1\$s>",
-            $wrapper,
-            $classes,
-            $content
-        );
+        return sprintf("<%1\$s class=\"%2\$s\">\n%3\$s\n</%1\$s>", $wrapper, $classes, $content);
     }
 
     /**
@@ -388,7 +391,7 @@ final class Renderer
             $iconClass,
             $icon,
             $labelClass,
-            $label
+            $label,
         );
     }
 

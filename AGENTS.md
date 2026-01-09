@@ -14,6 +14,8 @@
 -   `assets/callouts-svelte.css` Svelte-inspired theme (icon badge beside content).
 -   `EXAMPLE.md` GitHub-renderable preview showing built-in and custom callout types.
 -   `composer.json` publishes the composer package as `lemmon/kirby-callouts` (core plugin ID remains `lemmon/callouts`).
+-   `CHANGELOG.md` keeps release notes for user-facing changes.
+-   `mago.toml` configures formatting and linting rules.
 
 ## Parsing Flow
 
@@ -53,14 +55,7 @@
 -   Commit messages should follow the Conventional Commits spec (e.g. `fix: ...`, `refactor: ...`).
 -   Keep the BEM class structure (`callout`, `callout--foo`, `callout__header`, etc.) stable so existing CSS keeps working.
 -   If adding options, thread them through `index.php` → `Renderer::transform()` → `mergeConfig()`.
-
-## Future Ideas
-
--   Provide label translations (locale-specific strings for callout names).
--   Support custom inline labels per callout (e.g. `> [!TIP] Custom title`).
--   Offer a Tailwind-friendly styling option or preset.
--   Consider publishing a Kirby blueprint snippet documenting callout usage for editors.
--   Add automated snapshot tests comparing rendered HTML to fixtures.
--   Explore custom block type for Kirby's Blocks field.
+-   Run `mago fmt` / `mago lint` using `mago.toml` before committing.
+-   Update `CHANGELOG.md` for user-visible behavior changes.
 
 Keep this document updated when changing parser semantics, configuration keys, or shipped assets; future agents will thank you.

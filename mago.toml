@@ -1,0 +1,23 @@
+php-version = "8.2.0"
+
+[source]
+paths = ["lib", "tests"]
+
+[formatter]
+print-width = 100
+tab-width = 4
+use-tabs = false
+trailing-comma = true
+remove-trailing-close-tag = true
+
+[linter.rules]
+cyclomatic-complexity = { enabled = false }
+halstead = { enabled = false }
+kan-defect = { enabled = false }
+literal-named-argument = { enabled = false }
+# no-boolean-flag-parameter = { enabled = false }
+no-else-clause = { enabled = false }
+# no-empty-comment = { enabled = false }
+# no-ini-set = { enabled = false }
+tagged-todo = { enabled = false }
+too-many-methods = { enabled = false }
