@@ -13,6 +13,7 @@
 ### Fixed
 
 -   Callout parsing skips fenced code blocks.
+-   Callout rendering avoids re-entering `kirbytext` hooks.
 
 ## v1.0.0 - 2025-10-13
 

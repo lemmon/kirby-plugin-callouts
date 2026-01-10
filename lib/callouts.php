@@ -234,7 +234,7 @@ final class Renderer
     }
 
     /**
-     * Renders callout content to HTML, using Kirby's kirbytext helper when available.
+     * Renders callout content to HTML using KirbyTags, Markdown, and optional Smartypants.
      */
     private static function renderContent(string $content): string
     {
@@ -242,7 +242,16 @@ final class Renderer
             return '';
         }
 
-        return App::instance()->kirbytext($content);
+        $kirby = App::instance();
+
+        $content = $kirby->kirbytags($content);
+        $content = $kirby->markdown($content);
+
+        if ($kirby->option('smartypants', false) !== false) {
+            $content = $kirby->smartypants($content);
+        }
+
+        return $content;
     }
 
     /**

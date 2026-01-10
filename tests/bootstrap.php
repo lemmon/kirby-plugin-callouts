@@ -22,7 +22,22 @@ namespace Kirby\Cms {
                 return new self();
             }
 
-            public function kirbytext(string $content): string
+            public function kirbytags(string $content, array $data = []): string
+            {
+                return $content;
+            }
+
+            public function markdown(string $content, array|null $options = null): string
+            {
+                return $content;
+            }
+
+            public function option(string $key, mixed $default = null): mixed
+            {
+                return $default;
+            }
+
+            public function smartypants(string $content): string
             {
                 return $content;
             }
