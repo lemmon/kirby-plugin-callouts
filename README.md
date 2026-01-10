@@ -40,10 +40,18 @@ Keep writing Markdown/KirbyText as usual-whether you’re in a textarea field or
 > Add a handy tip right inside your content.
 ```
 
+Add an inline label to customize the header text without changing the callout type:
+
+```markdown
+> [!TIP] Quick Win
+> Short, scannable advice for busy readers.
+```
+
 ## Features
 
 -   Turn `> [!TYPE]` blocks into callout wrappers automatically.
 -   Supports NOTE, TIP, IMPORTANT, WARNING, CAUTION, and any custom type (e.g. `[!CHALLENGE]` -> `callout--challenge`).
+-   Supports custom inline labels after `[!TYPE]` for header text overrides.
 -   Configurable wrapper (`div` or `blockquote`) and CSS class prefix.
 -   Optional HTML header injection for icon/label markup (on by default).
 -   Inline SVG icons inherit the callout color and can be overridden per type.
@@ -131,6 +139,6 @@ Icons are based on the [Lucide](https://lucide.dev) icon set (MIT License).
 
 -   [x] Add Composer installation.
 -   [ ] Add label translations support.
--   [ ] Allow custom inline labels for known types (e.g. `> [!TIP] My Fancy Label Tip`).
+-   [x] Allow custom inline labels for known types (e.g. `> [!TIP] My Fancy Label Tip`).
 -   [ ] Explore Tailwind-friendly styling option.
 -   [ ] Create custom block type for Blocks Field.

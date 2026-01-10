@@ -145,12 +145,9 @@ final class Renderer
         $rawType = trim($matches[1]);
         $type = strtoupper($rawType);
         $titleRemainder = trim($matches[2]);
+        $labelOverride = $titleRemainder !== '' ? $titleRemainder : null;
 
         $contentLines = [];
-        if ($titleRemainder !== '') {
-            $contentLines[] = $titleRemainder;
-        }
-
         $lineTotal = count($block);
         for ($i = 1; $i < $lineTotal; $i++) {
             $contentLines[] = self::stripBlockquotePrefix($block[$i]);
@@ -159,7 +156,13 @@ final class Renderer
         $content = trim(implode("\n", $contentLines));
         $html = self::renderContent($content);
 
-        $meta = self::buildCalloutMeta($config['classPrefix'], $type, $rawType, $config);
+        $meta = self::buildCalloutMeta(
+            $config['classPrefix'],
+            $type,
+            $rawType,
+            $labelOverride,
+            $config,
+        );
 
         $segments = [];
         if ($config['renderHeader']) {
@@ -321,9 +324,18 @@ final class Renderer
         string $classPrefix,
         string $type,
         string $rawType,
+        string|null $labelOverride,
         array $config,
     ): array {
         $modifier = self::typeModifier($type);
+        $label = '';
+        if ($labelOverride !== null) {
+            $label = self::inlineLabel($labelOverride);
+        }
+
+        if ($label === '') {
+            $label = self::typeLabel($rawType);
+        }
 
         $baseClass = $classPrefix;
         $modifierClass = sprintf('%s--%s', $classPrefix, $modifier);
@@ -331,7 +343,7 @@ final class Renderer
         return [
             'classes' => trim(sprintf('%s %s', $baseClass, $modifierClass)),
             'modifier' => $modifier,
-            'label' => self::typeLabel($rawType),
+            'label' => $label,
             'prefix' => $classPrefix,
             'icon' => self::iconForModifier($modifier, $config['icons']),
         ];
@@ -378,6 +390,19 @@ final class Renderer
         $normalized = preg_replace('/[\s_]+/', ' ', $normalized) ?? $normalized;
 
         return strtoupper($normalized);
+    }
+
+    /**
+     * Normalizes an inline callout label.
+     */
+    private static function inlineLabel(string $label): string
+    {
+        $normalized = trim($label);
+        if ($normalized === '') {
+            return '';
+        }
+
+        return preg_replace('/\s+/', ' ', $normalized) ?? $normalized;
     }
 
     /**

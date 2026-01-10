@@ -4,6 +4,9 @@
 > [!TIP]
 > Drop key onboarding tips, pricing nudges, or release highlights right where your readers skim.
 
+> [!TIP] Quick Win
+> A short, custom label keeps the header specific without changing the callout type.
+
 > [!IMPORTANT]
 > Treat mission-critical announcements with the weight they deserve; the Lucide icons do the heavy lifting.
 

@@ -24,4 +24,15 @@ final class RendererIsolationTest extends TestCase
         $this->assertStringContainsString('outside', $output);
         $this->assertStringNotContainsString('[!NOTE]', $output);
     }
+
+    public function testUsesInlineLabelWithoutChangingModifier(): void
+    {
+        $input = "> [!TIP] My Fancy Label\n> Body line\n";
+        $output = Renderer::transform($input);
+
+        $this->assertStringContainsString('class="callout callout--tip"', $output);
+        $this->assertStringContainsString('My Fancy Label', $output);
+        $this->assertSame(2, substr_count($output, 'My Fancy Label'));
+        $this->assertStringContainsString('Body line', $output);
+    }
 }

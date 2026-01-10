@@ -21,7 +21,7 @@
 
 1. Normalize newlines, split into an array, and iterate once.
 2. Track fenced code blocks so callout detection skips those regions.
-3. Collect contiguous blockquote lines and inspect the first line for `[!TYPE]`.
+3. Collect contiguous blockquote lines and inspect the first line for `[!TYPE]` plus optional inline label text.
 4. Strip leading `>` from the block, fold back together, and run it through KirbyTags + Markdown (no `kirbytext` hooks).
 5. Generate wrapper metadata with BEM classes (`callout callout--{slug}`).
 6. Wrap in either `<div>` or `<blockquote>` (configurable).

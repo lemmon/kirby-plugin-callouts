@@ -5,6 +5,7 @@
 ### Added
 
 -   PHPUnit test suite with isolated renderer tests and optional Kirby integration test.
+-   Support inline labels after `[!TYPE]` for custom callout headers.
 
 ### Changed
 
